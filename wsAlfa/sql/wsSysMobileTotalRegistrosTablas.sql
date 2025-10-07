@@ -1,0 +1,1 @@
+select * from V_MV_Cpte where FECHA='28/07/2021'

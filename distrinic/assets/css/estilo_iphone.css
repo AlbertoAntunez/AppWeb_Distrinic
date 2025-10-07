@@ -1,0 +1,391 @@
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 290px) 
+  and (max-device-width: 480px)
+  {
+
+    .div-btn-regresar{
+        margin-top: 5px;
+    }
+    
+    .center{
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .small-center{
+        display: block;
+        text-align: center;
+      }
+    
+    .a-btn-regresar{
+        font-size: 1em;
+        color: #000000;
+        background: #1B6CD3;
+        color: #ffffff;
+        padding: 6px;
+    }
+    
+    .txt_sel_cli{
+        display:block;
+        text-align: center;
+    }
+    
+    /* INDEX */
+    .cabeceraMain{
+        height: 50px;
+        background:#d9d9d9;
+        padding: 10px;
+        border-bottom: 1px solid #b3b3b3;
+    }
+    
+    
+    .titulo_cab p{
+        font-size: 1.2em;
+        margin: auto;
+    }
+    
+    .configItem{
+        text-align: right;
+        /*padding: 10px;*/
+    }
+    
+    .configItem img{
+        height:30px;
+    }
+    
+    .divMnuPrincipal{
+        width: 100%;
+    }
+    
+    .mnuPrincipal{
+        margin-left: -15px;
+    }
+    
+    .mnuPrincipal li {
+        list-style: none;
+        padding: 10px;
+        border-bottom: 1px solid #b3b3b3;
+    }
+    
+    .mnuPrincipal li a{
+        text-decoration: none;
+        color: #000000;
+        font-size: 1.2em;
+    }
+    
+    .mnuPrincipal img{
+        width: 35px;
+        height: auto;
+        max-height: 35px;
+    }
+    
+    /*SYNC*/
+    
+    .p-10{
+        padding: 10px;
+    }
+    
+    .div-img-sync{
+        text-align: center;
+    }
+    
+    .div-img-sync img{
+        margin: auto;
+        width: 200px;
+        height: auto;
+    }
+    
+    .div-btn-sync{
+        text-align: center;
+        padding: 30px;
+        
+    }
+    
+    .div-btn-sync button{
+        font-size: 20px;
+    }
+    
+    #modalSync .modal-dialog {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #modalSync .modal-content {
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+    }
+    
+    /*LIST ORDERS*/
+    
+    .f-item{
+        border-bottom: 1px solid #b3b3b3;
+        /*height: 50px;*/
+        margin-top: 10px;
+        padding: 5px;
+    }
+    
+    .item{
+        color : #000000;
+    }
+    
+    .item img{
+        width: 30px;
+        height: auto;
+    }
+    
+    .f-item .nameCliente{
+        /*line-height: 1px;*/
+        font-size: 13px;
+    }
+    
+    .f-item .order-fh{
+        display: block;
+        margin-top: -10px;
+    }
+    
+    .col-total-order{
+        text-align: right;
+    }
+    
+    /*LIST PRODUCTS*/
+    
+    .f-product{
+        border-bottom: 1px solid #b3b3b3;
+        height: 60px;
+        margin-top: 10px;
+        padding: 5px;
+    }
+    
+    .product{
+        margin: 0;
+        padding: 0;
+        color: #000000;
+    }
+    
+    .f-product img{
+        width: 30px;
+        height: auto;
+    }
+    
+    .col-name-product{
+        /*margin-left: -15px;*/
+        margin: 0;
+        min-height: 34px !important;
+    }
+    
+    .nameProduct{
+        font-size: 0.9em;
+        /*font-weight: bold;*/
+    }
+    
+    .col-price-product{
+        text-align: right;
+        line-height: 1px;
+    }
+    
+    .col-id-product{
+        line-height: 1px;
+    }
+    
+    .formBusqueda{
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .formBusqueda input{
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #d9d9d9;
+    }
+    
+    .products-title{
+        font-size: 22px;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .fProduct{
+        margin-bottom: -10px;
+    }
+    
+    .fProduct input, .fProduct textarea{
+        border: 0;
+        border-bottom: 1px solid #b3b3b3;
+        background: #ffffff !important;
+        /*margin: 0 !important;*/
+    }
+    
+    /*LIST ORDERS*/
+    
+    .bot-orders{
+        text-align:right; 
+        margin-top:10px;
+    }
+    
+    .ftbot-orders{
+        border-bottom: 1px solid #b3b3b3;
+    }
+    
+    .bot-orders button{
+        height: 30px;
+        margin-bottom:10px;
+    }
+    
+    .bot-orders p{
+        font-size: 18px;
+    }
+    
+    .col-name-order{
+        padding:0;
+    }
+    
+    /*New Order*/
+    
+   .btns-newOrder button{
+        height: 45px;
+        width: 45%;
+    } 
+
+    .btns-newOrder button i{
+        font-size:80%;
+    }
+    
+    #list_order_products{
+        margin: 0 !important;
+        padding:5px;
+    }
+    
+    .detail-order-products{
+        border-bottom: 1px solid #b3b3b3;
+    }
+    
+    .cab-order-products{
+        border-bottom: 1px solid #b3b3b3;
+        background: #000000;
+        color: #ffffff;
+    }
+    
+    #load_div_order img{
+        margin-left: 25px;
+        margin-top: 25px;
+        width: 15px;
+    }
+    
+    .div-tot-order{
+        background:#000000; 
+        color: #ffffff;
+    }
+    
+    #del_product_order{
+        color: #000000;
+    }
+    
+    /*CTA CTE*/
+    
+    .box-ctacte{
+        border-bottom: 1px solid #b3b3b3; 
+        padding:5px 0 5px 0;
+    }
+    
+    .box-ctacte img{
+        width:30px; 
+        height:30px; 
+        margin-top:5px;
+    }
+    
+    .box-customer{
+        border-bottom: 1px solid #b3b3b3;
+        padding: 5px;
+    }
+    
+    .box-customer .col-xs-2{
+        padding: 5px;
+    }
+    
+    .box-customer .cod{
+        line-height: 1px;
+        margin-top: 10px;
+    }
+    
+    .box-customer img{
+        margin:auto;
+        width: 100%; 
+        height: auto;
+        max-width: 50px;
+    }
+    
+    .rowSaldo{
+        background: #000000;
+        color: #ffffff;
+    }
+    
+    /*Stock*/
+    
+    .box-stock{
+        border-bottom: 1px solid #b3b3b3; 
+        padding:5px 0 5px 0;
+    }
+    
+    .box-stock img{
+        width:30px; 
+        height:30px; 
+        margin-top:5px;
+    }
+    
+    .cod{
+        font-weight: bold;
+    }
+    
+    /*MOD BACK*/
+    
+    .bot-new-order a{
+        display: inline-block;
+    }
+    
+    .bot-new-order img{
+        width: 30px;
+        height: auto;
+        margin-left: 10px;
+    }
+    
+    /*MODAL ADD PRODUCT*/
+    
+    #modalProductsPreSaleProduct_body small{
+        display: block;
+    }
+    
+    #modalProductsPreSaleProduct_body input{
+        width: 100%;
+    }
+
+    
+    .titulo_cab small{
+        font-size: 10px;
+    }
+    
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}

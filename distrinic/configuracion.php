@@ -1,0 +1,12 @@
+<?php 
+define('SERVER_API','http://distrinic2020.ddns.net:5712/api');
+define('MODIFICA_CLASEP','1');
+define('VENDEDOR_CLIENTES_PROPIOS','0');
+define('STOCK_ONLINE_CONSULTAS','1');
+define('ARTS_POR_CONSULTA','20');
+define('MUESTRA_IMAGENES_PRODUCTOS','0');
+define('RUTA_IMAGENES_PRODUCTOS','');
+define('STOCK_COMPROMETIDO_MAS_REAL','1');
+define('NOMUESTRA_TOTALES_PEDIDOS','0');
+define('USA_OFFLINE','0');
+?>

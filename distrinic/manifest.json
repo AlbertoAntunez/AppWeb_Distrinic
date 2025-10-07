@@ -1,0 +1,45 @@
+{
+    "name": "Alfa SysMobile",
+    "short_name": "AlfaSyMobile",
+    "description": "Bienvenidos a AlfaSysmobile, donde podrás cargar tus pedidos estes donde estes y sincronizarlos con tu sistema Alfa Gestion",
+    "background_color": "#1B6CD3",
+    "theme_color": "#1B6CD3",
+    "orientation": "portrait",
+    "display": "standalone",
+    "start_url": "./inicio?utm_source=web_app_manifest",
+    "scope": "./",
+    "lang": "es-ES",
+    "icons": [
+        {
+            "src": "./assets/img/pwa/icon_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./assets/img/pwa/icon_144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+            
+        },
+        {
+            "src": "./assets/img/pwa/icon_64.png",
+            "sizes": "64x64",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./assets/img/pwa/icon_32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./assets/img/pwa/icon_16.png",
+            "sizes": "16x16",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
