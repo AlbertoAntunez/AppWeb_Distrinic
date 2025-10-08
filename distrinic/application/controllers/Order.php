@@ -149,21 +149,9 @@ class Order extends CI_Controller
         $api = new Lib_Apiws();
         $rs = $this->model_db->ejecutarConsulta("SELECT _id,codCliente,idVendedor,fecha,totalNeto,totalFinal,facturar,incluirEnReparto FROM PEDIDOS WHERE Transferido=0 ORDER BY _id", true);
 
-        $idPedido = 0;
-        $idPedidoAnt = 0;
-        $stringJson = "";
-        $primerProd = false;
-        $stringJson = "";
-        $facturar = 'false';
-        $reparto = 'false';
-
         $json_pedidos = array();
 
         foreach ($rs as $row) {
-
-            $idPedido = $row->_id;
-            $facturar = ($row->facturar == 1) ? 'true' : 'false';
-            $reparto = ($row->incluirEnReparto == 1) ? 'true' : 'false';
 
             $pedido = array(
                 'idpedido'          => $row->_id,
@@ -172,8 +160,8 @@ class Order extends CI_Controller
                 'fecha'             => $row->fecha,
                 'totalneto'         => $row->totalNeto,
                 'totalfinal'        => $row->totalFinal,
-                'facturar'          => $facturar,
-                'incluirenreparto'  => $reparto,
+                'facturar'          => ($row->facturar == 1),
+                'incluirenreparto'  => ($row->incluirEnReparto == 1),
                 'detallepedido'     => array(),
             );
 
