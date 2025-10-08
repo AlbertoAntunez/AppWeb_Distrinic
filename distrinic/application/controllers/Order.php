@@ -149,32 +149,20 @@ class Order extends CI_Controller
         $api = new Lib_Apiws();
         $rs = $this->model_db->ejecutarConsulta("SELECT _id,codCliente,idVendedor,fecha,totalNeto,totalFinal,facturar,incluirEnReparto FROM PEDIDOS WHERE Transferido=0 ORDER BY _id", true);
 
-        $idPedido = 0;
-        $idPedidoAnt = 0;
-        $stringJson = "";
-        $primerProd = false;
-        $stringJson = "";
-        $facturar = 'false';
-        $reparto = 'false';
-
         $json_pedidos = array();
 
         foreach ($rs as $row) {
 
-            $idPedido = $row->_id;
-            $facturar = ($row->facturar == 1) ? 'true' : 'false';
-            $reparto = ($row->incluirEnReparto == 1) ? 'true' : 'false';
-
             $pedido = array(
-                'idpedido'          => $row->_id,
-                'idcliente'         => $row->codCliente,
-                'idvendedor'        => $row->idVendedor,
+                'idPedido'          => $row->_id,
+                'idCliente'         => $row->codCliente,
+                'idVendedor'        => $row->idVendedor,
                 'fecha'             => $row->fecha,
-                'totalneto'         => $row->totalNeto,
-                'totalfinal'        => $row->totalFinal,
-                'facturar'          => $facturar,
-                'incluirenreparto'  => $reparto,
-                'detallepedido'     => array(),
+                'totalNeto'         => $row->totalNeto,
+                'totalFinal'        => $row->totalFinal,
+                'facturar'          => ($row->facturar == 1),
+                'incluirEnReparto'  => ($row->incluirEnReparto == 1),
+                'detallePedido'     => array(),
             );
 
             $pedidoItems = array();
@@ -182,17 +170,17 @@ class Order extends CI_Controller
             $rsItems = $this->model_db->ejecutarConsulta("SELECT * FROM pedidosItems WHERE idPedido=" . $row->_id, true);
             foreach ($rsItems as $rowItem) {
                 $pitem = array(
-                    'idpedido'          => $row->_id,
-                    'idarticulo'        => $rowItem->idArticulo,
+                    'idPedido'          => $row->_id,
+                    'idArticulo'        => $rowItem->idArticulo,
                     'cantidad'          => $rowItem->cantidad,
-                    'importeunitario'   => $rowItem->importeUnitario,
-                    'porcdto'           => $rowItem->porcDescuento,
+                    'importeUnitario'   => $rowItem->importeUnitario,
+                    'porcDto'           => $rowItem->porcDescuento,
                     'total'             => $rowItem->total
                 );
                 array_push($pedidoItems, $pitem);
             }
 
-            $pedido['detallepedido'] = $pedidoItems;
+            $pedido['detallePedido'] = $pedidoItems;
             array_push($json_pedidos, $pedido);
         }
 
