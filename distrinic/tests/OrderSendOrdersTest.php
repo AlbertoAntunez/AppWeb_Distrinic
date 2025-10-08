@@ -1,5 +1,28 @@
 <?php
 
+// Attempt to load Composer's autoloader when the test file is accessed
+// directly (e.g. through a browser) so we can determine whether PHPUnit is
+// available. If it is still missing, emit a friendly message instead of a
+// generic HTTP 500 error.
+if (!class_exists('PHPUnit\\Framework\\TestCase') && is_file(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
+
+if (!class_exists('PHPUnit\\Framework\\TestCase')) {
+    if (!headers_sent()) {
+        header('Content-Type: text/plain; charset=UTF-8');
+    }
+
+    echo "Este archivo contiene pruebas automatizadas para sendOrders.\n";
+    echo "Ejecutalas desde la línea de comandos con: ./vendor/bin/phpunit\n";
+
+    return;
+}
+
+if (!class_exists('Order') && is_file(__DIR__ . '/../application/controllers/Order.php')) {
+    require_once __DIR__ . '/../application/controllers/Order.php';
+}
+
 use PHPUnit\Framework\TestCase;
 
 class FakeUtility
