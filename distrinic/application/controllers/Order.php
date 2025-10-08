@@ -3,6 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Order extends CI_Controller
 {
+    /** @var Model_db */
+    public $model_db;
+
+    /** @var Funciones */
+    public $utl;
+
+    /** @var CI_Cart */
+    public $cart;
 
     public function __construct()
     {
@@ -146,24 +154,12 @@ class Order extends CI_Controller
     {
         $this->utl->redirectNoLogin();
 
-        $api = new Lib_Apiws();
+        $api = $this->createApiClient();
         $rs = $this->model_db->ejecutarConsulta("SELECT _id,codCliente,idVendedor,fecha,totalNeto,totalFinal,facturar,incluirEnReparto FROM PEDIDOS WHERE Transferido=0 ORDER BY _id", true);
-
-        $idPedido = 0;
-        $idPedidoAnt = 0;
-        $stringJson = "";
-        $primerProd = false;
-        $stringJson = "";
-        $facturar = 'false';
-        $reparto = 'false';
 
         $json_pedidos = array();
 
         foreach ($rs as $row) {
-
-            $idPedido = $row->_id;
-            $facturar = ($row->facturar == 1) ? 'true' : 'false';
-            $reparto = ($row->incluirEnReparto == 1) ? 'true' : 'false';
 
             $pedido = array(
                 'idpedido'          => $row->_id,
@@ -172,8 +168,8 @@ class Order extends CI_Controller
                 'fecha'             => $row->fecha,
                 'totalneto'         => $row->totalNeto,
                 'totalfinal'        => $row->totalFinal,
-                'facturar'          => $facturar,
-                'incluirenreparto'  => $reparto,
+                'facturar'          => ($row->facturar == 1),
+                'incluirenreparto'  => ($row->incluirEnReparto == 1),
                 'detallepedido'     => array(),
             );
 
@@ -198,26 +194,43 @@ class Order extends CI_Controller
 
         if ($json_pedidos) {
 
+            log_message('debug', 'sendOrders - pedidos preparados: ' . print_r($json_pedidos, true));
+
             $api->strJson = json_encode($json_pedidos);
             $api->method = "setPedidos/";
             $res = $api->sendComprobantes();
+            $resString = is_string($res) ? trim($res) : (string) $res;
 
-            if ($res == 1) {
+            log_message('debug', 'sendOrders - respuesta API: ' . $resString);
+
+            if ($resString === '1') {
                 $this->model_db->ejecutarConsulta("DELETE FROM pedidosItems");
                 $this->model_db->ejecutarConsulta("DELETE FROM PEDIDOS");
                 echo "OK";
             } else {
-                $response = json_decode($res);
-                if (isset($response->error)) {
+                $response = json_decode($resString);
+                if (is_object($response) && isset($response->error)) {
+                    log_message('error', 'sendOrders - API devolvió error: ' . $response->message);
                     echo $response->message;
+                } elseif ($resString === '0') {
+                    $message = 'Hubo un error al enviar los pedidos. Intente nuevamente.';
+                    log_message('error', 'sendOrders - API devolvió código de error genérico (0).');
+                    echo $message;
                 } else {
-                    echo $res; // "Hubo un error. Intente nuevamente";
+                    log_message('error', 'sendOrders - respuesta inesperada: ' . $resString);
+                    echo $resString; // "Hubo un error. Intente nuevamente";
                 }
             }
         } else {
             //no hay pedidos o no se procesaron
+            log_message('debug', 'sendOrders - no hay pedidos pendientes para enviar');
             echo "OK"; //"No hay pedidos pendientes para enviar.";
         }
+    }
+
+    protected function createApiClient()
+    {
+        return new Lib_Apiws();
     }
 
     public function saveOrderOffline()
