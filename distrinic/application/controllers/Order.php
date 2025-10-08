@@ -149,21 +149,9 @@ class Order extends CI_Controller
         $api = new Lib_Apiws();
         $rs = $this->model_db->ejecutarConsulta("SELECT _id,codCliente,idVendedor,fecha,totalNeto,totalFinal,facturar,incluirEnReparto FROM PEDIDOS WHERE Transferido=0 ORDER BY _id", true);
 
-        $idPedido = 0;
-        $idPedidoAnt = 0;
-        $stringJson = "";
-        $primerProd = false;
-        $stringJson = "";
-        $facturar = 'false';
-        $reparto = 'false';
-
         $json_pedidos = array();
 
         foreach ($rs as $row) {
-
-            $idPedido = $row->_id;
-            $facturar = ($row->facturar == 1) ? 'true' : 'false';
-            $reparto = ($row->incluirEnReparto == 1) ? 'true' : 'false';
 
             $pedido = array(
                 'idpedido'          => $row->_id,
@@ -172,8 +160,8 @@ class Order extends CI_Controller
                 'fecha'             => $row->fecha,
                 'totalneto'         => $row->totalNeto,
                 'totalfinal'        => $row->totalFinal,
-                'facturar'          => $facturar,
-                'incluirenreparto'  => $reparto,
+                'facturar'          => ($row->facturar == 1),
+                'incluirenreparto'  => ($row->incluirEnReparto == 1),
                 'detallepedido'     => array(),
             );
 
@@ -198,9 +186,13 @@ class Order extends CI_Controller
 
         if ($json_pedidos) {
 
+            log_message('debug', 'sendOrders - pedidos preparados: ' . print_r($json_pedidos, true));
+
             $api->strJson = json_encode($json_pedidos);
             $api->method = "setPedidos/";
             $res = $api->sendComprobantes();
+
+            log_message('debug', 'sendOrders - respuesta API: ' . $res);
 
             if ($res == 1) {
                 $this->model_db->ejecutarConsulta("DELETE FROM pedidosItems");
@@ -209,13 +201,16 @@ class Order extends CI_Controller
             } else {
                 $response = json_decode($res);
                 if (isset($response->error)) {
+                    log_message('error', 'sendOrders - API devolvió error: ' . $response->message);
                     echo $response->message;
                 } else {
+                    log_message('error', 'sendOrders - respuesta inesperada: ' . $res);
                     echo $res; // "Hubo un error. Intente nuevamente";
                 }
             }
         } else {
             //no hay pedidos o no se procesaron
+            log_message('debug', 'sendOrders - no hay pedidos pendientes para enviar');
             echo "OK"; //"No hay pedidos pendientes para enviar.";
         }
     }
