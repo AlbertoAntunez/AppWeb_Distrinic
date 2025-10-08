@@ -186,9 +186,13 @@ class Order extends CI_Controller
 
         if ($json_pedidos) {
 
+            log_message('debug', 'sendOrders - pedidos preparados: ' . print_r($json_pedidos, true));
+
             $api->strJson = json_encode($json_pedidos);
             $api->method = "setPedidos/";
             $res = $api->sendComprobantes();
+
+            log_message('debug', 'sendOrders - respuesta API: ' . $res);
 
             if ($res == 1) {
                 $this->model_db->ejecutarConsulta("DELETE FROM pedidosItems");
@@ -197,13 +201,16 @@ class Order extends CI_Controller
             } else {
                 $response = json_decode($res);
                 if (isset($response->error)) {
+                    log_message('error', 'sendOrders - API devolvió error: ' . $response->message);
                     echo $response->message;
                 } else {
+                    log_message('error', 'sendOrders - respuesta inesperada: ' . $res);
                     echo $res; // "Hubo un error. Intente nuevamente";
                 }
             }
         } else {
             //no hay pedidos o no se procesaron
+            log_message('debug', 'sendOrders - no hay pedidos pendientes para enviar');
             echo "OK"; //"No hay pedidos pendientes para enviar.";
         }
     }
