@@ -1,5 +1,6 @@
 ﻿vendor/
 composer.lock
+.phpunit.result.cache
 application/cache/*
 application/logs/*
 !application/logs/index.html
