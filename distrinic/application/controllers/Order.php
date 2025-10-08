@@ -154,9 +154,9 @@ class Order extends CI_Controller
         foreach ($rs as $row) {
 
             $pedido = array(
-                'idpedido'          => $row->_id,
-                'idcliente'         => $row->codCliente,
-                'idvendedor'        => $row->idVendedor,
+                'idPedido'          => $row->_id,
+                'idCliente'         => $row->codCliente,
+                'idVendedor'        => $row->idVendedor,
                 'fecha'             => $row->fecha,
                 'totalneto'         => $row->totalNeto,
                 'totalfinal'        => $row->totalFinal,
@@ -170,17 +170,17 @@ class Order extends CI_Controller
             $rsItems = $this->model_db->ejecutarConsulta("SELECT * FROM pedidosItems WHERE idPedido=" . $row->_id, true);
             foreach ($rsItems as $rowItem) {
                 $pitem = array(
-                    'idpedido'          => $row->_id,
-                    'idarticulo'        => $rowItem->idArticulo,
+                    'idPedido'          => $row->_id,
+                    'idArticulo'        => $rowItem->idArticulo,
                     'cantidad'          => $rowItem->cantidad,
-                    'importeunitario'   => $rowItem->importeUnitario,
-                    'porcdto'           => $rowItem->porcDescuento,
+                    'importeUnitario'   => $rowItem->importeUnitario,
+                    'porcDto'           => $rowItem->porcDescuento,
                     'total'             => $rowItem->total
                 );
                 array_push($pedidoItems, $pitem);
             }
 
-            $pedido['detallepedido'] = $pedidoItems;
+            $pedido['detallePedido'] = $pedidoItems;
             array_push($json_pedidos, $pedido);
         }
 
