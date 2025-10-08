@@ -212,24 +212,6 @@ class Order extends CI_Controller
                     echo $response->message;
                 } else {
                     echo $res; // "Hubo un error. Intente nuevamente";
-
-                //a//07-10-2025
-                $.post('<?= site_url("order/sendOrders"); ?>', {})
-                .done(function(resp){
-                    console.log('OK:', resp);
-                    // mostrar msj OK en el modal
-                })
-                .fail(function(xhr){
-                    console.error('Fallo:', xhr.status, xhr.responseText);
-                    // mostrar xhr.responseText en un <pre> del modal
-                    $('#resultado').html(
-                    '<pre style="white-space:pre-wrap">'+
-                    $('<div>').text(xhr.responseText).html()+'</pre>'
-                    );
-                });
-                //a//fin 07-10-2025
-
-                    
                 }
             }
         } else {
