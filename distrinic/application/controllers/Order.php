@@ -158,11 +158,11 @@ class Order extends CI_Controller
                 'idCliente'         => $row->codCliente,
                 'idVendedor'        => $row->idVendedor,
                 'fecha'             => $row->fecha,
-                'totalNeto'         => $row->totalNeto,
-                'totalFinal'        => $row->totalFinal,
+                'totalneto'         => $row->totalNeto,
+                'totalfinal'        => $row->totalFinal,
                 'facturar'          => ($row->facturar == 1),
-                'incluirEnReparto'  => ($row->incluirEnReparto == 1),
-                'detallePedido'     => array(),
+                'incluirenreparto'  => ($row->incluirEnReparto == 1),
+                'detallepedido'     => array(),
             );
 
             $pedidoItems = array();
