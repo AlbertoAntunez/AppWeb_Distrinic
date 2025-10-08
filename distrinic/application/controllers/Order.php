@@ -4,13 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Order extends CI_Controller
 {
     /** @var Model_db */
-    protected $model_db;
+    public $model_db;
 
     /** @var Funciones */
-    protected $utl;
+    public $utl;
 
     /** @var CI_Cart */
-    protected $cart;
+    public $cart;
 
     public function __construct()
     {
